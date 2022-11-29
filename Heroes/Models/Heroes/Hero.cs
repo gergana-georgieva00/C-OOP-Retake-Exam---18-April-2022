@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Heroes.Models.Heroes
 {
-    public abstract class Hero 
+    public abstract class Hero : IHero
     {
         private string name;
         private int health;
@@ -75,6 +75,31 @@ namespace Heroes.Models.Heroes
                 }
 
                 this.weapon = value;
+            }
+        }
+
+        public void AddWeapon(IWeapon weapon)
+        {
+            if (!(this.Weapon == null))
+            {
+                this.Weapon = weapon;
+            }
+        }
+
+        public void TakeDamage(int points)
+        {
+            int transferPoints = points - this.Armour;
+            this.Armour -= points;
+
+            if (Armour <= 0)
+            {
+                Armour = 0;
+                this.Health -= transferPoints;
+
+                if (this.Health <= 0)
+                {
+                    this.Health = 0;
+                }
             }
         }
     }
