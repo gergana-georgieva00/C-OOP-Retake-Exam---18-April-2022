@@ -40,7 +40,7 @@ namespace Heroes.Core
             IWeapon weapon = weapons.FindByName(weaponName);
             this.heroes.FindByName(heroName).AddWeapon(weapon);
 
-            return $"Hero {heroName} can participate in battle using a {this.heroes.FindByName(heroName).Weapon.GetType().Name.ToLower()}.";
+            return $"Hero {heroName} can participate in battle using a {weapon.GetType().Name.ToLower()}.";
         }
 
         public string CreateHero(string type, string name, int health, int armour)
@@ -136,7 +136,7 @@ namespace Heroes.Core
         public string StartBattle()
         {
             var map = new Map();
-            return map.Fight((ICollection<IHero>)heroes);
+            return map.Fight((ICollection<IHero>)heroes.Models);
         }
     }
 }

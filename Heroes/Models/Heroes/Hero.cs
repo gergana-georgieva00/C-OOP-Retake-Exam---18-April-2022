@@ -80,7 +80,7 @@ namespace Heroes.Models.Heroes
 
         public void AddWeapon(IWeapon weapon)
         {
-            if (!(this.Weapon == null))
+            if (this.Weapon == null)
             {
                 this.Weapon = weapon;
             }

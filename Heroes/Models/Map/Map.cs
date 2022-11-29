@@ -34,7 +34,10 @@ namespace Heroes.Models.Map
                     if (knight.IsAlive && barbarian.IsAlive)
                     {
                         barbarian.TakeDamage(knight.Weapon.DoDamage());
-                        barbariansDead++;
+                        if (!barbarian.IsAlive)
+                        {
+                            barbariansDead++;
+                        }
                     }
                 }
             }
@@ -45,7 +48,10 @@ namespace Heroes.Models.Map
                     if (knight.IsAlive && barbarian.IsAlive)
                     {
                         knight.TakeDamage(barbarian.Weapon.DoDamage());
-                        knightsDead++;
+                        if (!knight.IsAlive)
+                        {
+                            knightsDead++;
+                        }
                     }
                 }
             }
