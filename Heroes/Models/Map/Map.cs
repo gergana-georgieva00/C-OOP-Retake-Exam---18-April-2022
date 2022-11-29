@@ -34,6 +34,7 @@ namespace Heroes.Models.Map
                     if (knight.IsAlive && barbarian.IsAlive)
                     {
                         barbarian.TakeDamage(knight.Weapon.DoDamage());
+                        barbariansDead++;
                     }
                 }
             }
@@ -44,17 +45,18 @@ namespace Heroes.Models.Map
                     if (knight.IsAlive && barbarian.IsAlive)
                     {
                         knight.TakeDamage(barbarian.Weapon.DoDamage());
+                        knightsDead++;
                     }
                 }
             }
 
             if (knights.Count == 0)
             {
-                return "The barbarians took { number of death barbarians } casualties but won the battle.";
+                return $"The barbarians took {barbariansDead} casualties but won the battle.";
             }
             else
             {
-                return "The knights took { number of death knights } casualties but won the battle.";
+                return $"The knights took {knightsDead} casualties but won the battle.";
             }
         }
     }
