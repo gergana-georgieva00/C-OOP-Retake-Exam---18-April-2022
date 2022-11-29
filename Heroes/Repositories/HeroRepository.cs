@@ -25,7 +25,7 @@ namespace Heroes.Repositories
 
         public IHero FindByName(string name)
         {
-            return this.models.FirstOrDefault(m => m.)
+            return (IHero)(this.models.GetType().GetProperty(name).GetValue(models));
         }
 
         public bool Remove(IHero model)
