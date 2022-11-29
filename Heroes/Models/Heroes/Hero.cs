@@ -13,9 +13,11 @@ namespace Heroes.Models.Heroes
         private bool isAlive;
         private IWeapon weapon;
 
-        public Hero()
+        public Hero(string name, int health, int armour)
         {
-
+            this.Name = name;
+            this.health = health;
+            this.armour = armour;
         }
 
         public string Name 
@@ -62,10 +64,18 @@ namespace Heroes.Models.Heroes
                 return true;
             }
         }
-        public string Name
+        public IWeapon Weapon
         {
-            get;
-            set;
+            get { return this.weapon; }
+            private set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException("Weapon cannot be null.");
+                }
+
+                this.weapon = value;
+            }
         }
     }
 }
