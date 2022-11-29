@@ -33,7 +33,7 @@ namespace Heroes.Models.Weapons
         public int Durability
         {
             get { return this.durability; }
-            private set
+            set
             {
                 if (value < 0)
                 {
