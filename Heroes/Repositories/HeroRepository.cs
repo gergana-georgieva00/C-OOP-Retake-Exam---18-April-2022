@@ -1,4 +1,5 @@
-﻿using Heroes.Models.Heroes;
+﻿using Heroes.Models.Contracts;
+using Heroes.Models.Heroes;
 using Heroes.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Heroes.Repositories
 {
-    public class HeroRepository<IHero> : IRepository<IHero>
+    public class HeroRepository : IRepository<IHero>
     {
         private List<IHero> models;
 
@@ -25,7 +26,7 @@ namespace Heroes.Repositories
 
         public IHero FindByName(string name)
         {
-            return (IHero)(this.models.GetProperty(name).GetValue(models));
+            return this.models.Find(h => h.Name == name);
         }
 
         public bool Remove(IHero model)

@@ -1,11 +1,12 @@
-﻿using Heroes.Repositories.Contracts;
+﻿using Heroes.Models.Contracts;
+using Heroes.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Heroes.Repositories
 {
-    public class WeaponRepository<IWeapon> : IRepository<IWeapon>
+    public class WeaponRepository : IRepository<IWeapon>
     {
         private List<IWeapon> weapons;
 
@@ -23,7 +24,7 @@ namespace Heroes.Repositories
 
         public IWeapon FindByName(string name)
         {
-            return (IWeapon)weapons.GetType().GetProperty(name).GetValue(weapons);
+            return this.weapons.Find(w => w.Name == name);
         }
 
         public bool Remove(IWeapon model)
