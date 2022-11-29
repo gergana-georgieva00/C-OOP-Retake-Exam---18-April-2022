@@ -1,6 +1,7 @@
 ﻿using Heroes.Core.Contracts;
 using Heroes.Models.Contracts;
 using Heroes.Models.Heroes;
+using Heroes.Models.Map;
 using Heroes.Models.Weapons;
 using Heroes.Repositories;
 using System;
@@ -105,7 +106,8 @@ namespace Heroes.Core
 
         public string StartBattle()
         {
-            throw new NotImplementedException();
+            var map = new Map();
+            return map.Fight((ICollection<IHero>)heroes);
         }
     }
 }
