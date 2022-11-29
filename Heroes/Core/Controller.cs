@@ -1,6 +1,7 @@
 ﻿using Heroes.Core.Contracts;
 using Heroes.Models.Contracts;
 using Heroes.Models.Heroes;
+using Heroes.Models.Weapons;
 using Heroes.Repositories;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,30 @@ namespace Heroes.Core
 
         public string CreateWeapon(string type, string name, int durability)
         {
-            throw new NotImplementedException();
+            if (this.weapons.Models.Any(w => w.Name == name))
+            {
+                throw new InvalidOperationException($"The weapon {name} already exists.");
+            }
+            if (type != "Claymore" && type != "Mace" && type != "Weapon")
+            {
+                throw new InvalidOperationException("Invalid weapon type.");
+            }
+
+            IWeapon weapon;
+            string message = "";
+            if (type == "Claymore")
+            {
+                weapon = new Claymore(name, durability);
+                message = $"A claymore {name} is added to the collection.";
+            }
+            else
+            {
+                weapon = new Mace(name, durability);
+                message = $"A mace {name} is added to the collection.";
+            }
+
+            weapons.Add(weapon);
+            return message;
         }
 
         public string HeroReport()
