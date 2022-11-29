@@ -23,7 +23,22 @@ namespace Heroes.Core
 
         public string AddWeaponToHero(string weaponName, string heroName)
         {
-            throw new NotImplementedException();
+            if (!this.heroes.Models.Any(h => h.Name == heroName))
+            {
+                throw new InvalidOperationException($"Hero {heroName} does not exist.");
+            }
+            if (!this.weapons.Models.Any(w => w.Name == weaponName))
+            {
+                throw new InvalidOperationException($"Weapon {weaponName} does not exist.");
+            }
+            if (this.heroes.FindByName(heroName).Weapon != null)
+            {
+                throw new InvalidOperationException($"Hero {heroName} is well-armed.");
+            }
+
+
+
+            return $"Hero {heroName} can participate in battle using a {this.heroes.FindByName(heroName).Weapon.GetType().Name.ToLower()}.";
         }
 
         public string CreateHero(string type, string name, int health, int armour)
