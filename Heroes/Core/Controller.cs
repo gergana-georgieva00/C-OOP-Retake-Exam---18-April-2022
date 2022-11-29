@@ -101,7 +101,36 @@ namespace Heroes.Core
 
         public string HeroReport()
         {
-            throw new NotImplementedException();
+            //Returns information about each hero separated with a new line.
+            //Order them by hero type alphabetically,
+            //then by health descending,
+            //then by hero name alphabetically:
+
+            //--Health: { hero health }
+            //--Armour: { hero armour }
+            //--Weapon: { weapon name }/ Unarmed
+
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var hero in heroes.Models.OrderBy(h => h.GetType().Name)
+                .ThenByDescending(h => h.Health)
+                .ThenBy(h => h.Name))
+            {
+                sb.AppendLine($"{hero.GetType().Name}: {hero.Name}");
+                sb.AppendLine($"--Health: {hero.Health}");
+                sb.AppendLine($"--Armour: {hero.Armour}");
+                if (hero.Weapon == null)
+                {
+                    sb.AppendLine("--Weapon: Unarmed");
+                }
+                else
+                {
+                    sb.AppendLine($"--Weapon: {hero.Weapon.Name}");
+                }
+            }
+
+            return sb.ToString();
         }
 
         public string StartBattle()
