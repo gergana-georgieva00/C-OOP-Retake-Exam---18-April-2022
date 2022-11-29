@@ -29,6 +29,11 @@ namespace Heroes.Repositories
             return this.models.Find(h => h.Name == name);
         }
 
+        internal bool Any()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Remove(IHero model)
         {
             return this.models.Remove(model);
