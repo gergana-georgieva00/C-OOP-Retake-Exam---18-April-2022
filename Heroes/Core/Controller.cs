@@ -36,7 +36,8 @@ namespace Heroes.Core
                 throw new InvalidOperationException($"Hero {heroName} is well-armed.");
             }
 
-
+            IWeapon weapon = weapons.FindByName(weaponName);
+            this.heroes.FindByName(heroName).AddWeapon(weapon);
 
             return $"Hero {heroName} can participate in battle using a {this.heroes.FindByName(heroName).Weapon.GetType().Name.ToLower()}.";
         }
