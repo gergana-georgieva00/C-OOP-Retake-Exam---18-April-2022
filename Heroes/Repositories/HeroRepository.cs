@@ -1,6 +1,8 @@
-﻿using Heroes.Repositories.Contracts;
+﻿using Heroes.Models.Heroes;
+using Heroes.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Heroes.Repositories
@@ -14,7 +16,7 @@ namespace Heroes.Repositories
             this.models = new List<IHero>();
         }
 
-        public IReadOnlyCollection<IHero> Models => this.models;
+        public IReadOnlyCollection<IHero> Models => this.models.AsReadOnly();
 
         public void Add(IHero model)
         {
@@ -23,12 +25,12 @@ namespace Heroes.Repositories
 
         public IHero FindByName(string name)
         {
-            throw new NotImplementedException();
+            return this.models.FirstOrDefault(m => m.)
         }
 
         public bool Remove(IHero model)
         {
-            throw new NotImplementedException();
+            return this.models.Remove(model);
         }
     }
 }
