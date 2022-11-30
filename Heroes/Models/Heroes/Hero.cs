@@ -98,9 +98,8 @@ namespace Heroes.Models.Heroes
         public void TakeDamage(int points)
         {
             int transferPoints = points - this.Armour;
-            this.Armour -= points;
 
-            if (Armour <= 0)
+            if (Armour - points <= 0)
             {
                 Armour = 0;
                 
@@ -112,6 +111,10 @@ namespace Heroes.Models.Heroes
                 {
                     this.Health -= transferPoints;
                 }
+            }
+            else
+            {
+                this.Armour -= points;
             }
         }
     }
