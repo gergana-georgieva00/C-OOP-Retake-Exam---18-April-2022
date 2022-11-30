@@ -1,6 +1,7 @@
 ﻿using Heroes.Models.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Heroes.Models.Map
@@ -27,11 +28,11 @@ namespace Heroes.Models.Map
             int knightsDead = 0;
             int barbariansDead = 0;
 
-            foreach (var knight in knights)
+            while (knights.Any(k => k.IsAlive) && barbarians.Any(b => b.IsAlive))
             {
-                foreach (var barbarian in barbarians)
+                foreach (var knight in knights.Where(k => k.IsAlive))
                 {
-                    if (knight.IsAlive && barbarian.IsAlive)
+                    foreach (var barbarian in barbarians.Where(b => b.IsAlive))
                     {
                         barbarian.TakeDamage(knight.Weapon.DoDamage());
                         if (!barbarian.IsAlive)
@@ -40,12 +41,9 @@ namespace Heroes.Models.Map
                         }
                     }
                 }
-            }
-            foreach (var barbarian in barbarians)
-            {
-                foreach (var knight in knights)
+                foreach (var barbarian in barbarians.Where(b => b.IsAlive))
                 {
-                    if (knight.IsAlive && barbarian.IsAlive)
+                    foreach (var knight in knights.Where(k => k.IsAlive))
                     {
                         knight.TakeDamage(barbarian.Weapon.DoDamage());
                         if (!knight.IsAlive)
@@ -56,7 +54,7 @@ namespace Heroes.Models.Map
                 }
             }
 
-            if (knights.Count == 0)
+            if (!knights.Any(k => k.IsAlive))
             {
                 return $"The barbarians took {barbariansDead} casualties but won the battle.";
             }

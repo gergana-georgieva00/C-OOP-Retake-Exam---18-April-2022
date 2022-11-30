@@ -16,8 +16,8 @@ namespace Heroes.Models.Heroes
         public Hero(string name, int health, int armour)
         {
             this.Name = name;
-            this.health = health;
-            this.armour = armour;
+            this.Health = health;
+            this.Armour = armour;
         }
 
         public string Name 
@@ -42,6 +42,8 @@ namespace Heroes.Models.Heroes
                 {
                     throw new ArgumentException("Hero health cannot be below 0.");
                 }
+
+                this.health = value;
             }
         }
         public int Armour
@@ -56,12 +58,14 @@ namespace Heroes.Models.Heroes
         {
             get
             {
-                if (this.Health <= 0)
+                if (this.Health > 0)
+                {
+                    return true;
+                }
+                else
                 {
                     return false;
                 }
-
-                return true;
             }
         }
         public IWeapon Weapon
@@ -94,11 +98,14 @@ namespace Heroes.Models.Heroes
             if (Armour <= 0)
             {
                 Armour = 0;
-                this.Health -= transferPoints;
-
-                if (this.Health <= 0)
+                
+                if (this.Health - transferPoints <= 0)
                 {
                     this.Health = 0;
+                }
+                else
+                {
+                    this.Health -= transferPoints;
                 }
             }
         }
