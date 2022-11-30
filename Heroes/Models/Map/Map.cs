@@ -34,22 +34,30 @@ namespace Heroes.Models.Map
                 {
                     foreach (var barbarian in barbarians.Where(b => b.IsAlive))
                     {
-                        barbarian.TakeDamage(knight.Weapon.DoDamage());
-                        if (!barbarian.IsAlive)
+                        if (knight.Weapon != null && knight.Weapon.Durability > 0)
                         {
-                            barbariansDead++;
+                            barbarian.TakeDamage(knight.Weapon.DoDamage());
+                            if (!barbarian.IsAlive)
+                            {
+                                barbariansDead++;
+                            }
                         }
+                        
                     }
                 }
                 foreach (var barbarian in barbarians.Where(b => b.IsAlive))
                 {
                     foreach (var knight in knights.Where(k => k.IsAlive))
                     {
-                        knight.TakeDamage(barbarian.Weapon.DoDamage());
-                        if (!knight.IsAlive)
+                        if (barbarian.Weapon.Durability > 0)
                         {
-                            knightsDead++;
+                            knight.TakeDamage(barbarian.Weapon.DoDamage());
+                            if (!knight.IsAlive)
+                            {
+                                knightsDead++;
+                            }
                         }
+                        
                     }
                 }
             }

@@ -51,6 +51,11 @@ namespace Heroes.Models.Heroes
             get { return this.armour; }
             private set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Hero armour cannot be below 0.");
+                }
+
                 this.armour = value;
             }
         }
